@@ -16,6 +16,9 @@ class GameViewController: UIViewController {
     @IBOutlet weak var roundLabel: UILabel!
     @IBOutlet weak var gameSlider: UISlider!
     
+    var round : Int = 1
+    var score : Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -24,6 +27,8 @@ class GameViewController: UIViewController {
   
     @IBAction func hitMePressed(_ sender: UIButton) {
         //logic
+        setTargetLabel(number: generateRandomNumber())
+        
     }
     
     @IBAction func resetPressed(_ sender: UIButton) {
@@ -32,6 +37,16 @@ class GameViewController: UIViewController {
     
     @IBAction func infoPressed(_ sender: UIButton) {
         //take to how to play storyboard
+        performSegue(withIdentifier: "howToPlaySegue", sender: self)
+    }
+    
+    func generateRandomNumber() -> Int {
+        let gameRange : UInt32 = 99
+        return Int(arc4random_uniform(gameRange) + 1)
+    }
+    
+    func setTargetLabel(number : Int)  {
+        targetLabel.text = "The Target for this round is \(number)"
     }
     
 }
